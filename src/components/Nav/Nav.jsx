@@ -7,9 +7,9 @@ const Navigator = ({url}) => {
         <div className={styles.nav}>
         <div><a href='/profile'>Profile</a></div>
         <div><a href='/dialogs'>Dialogs</a></div>
-        <div><a href={url} >News</a></div>
-        <div><a href={url} >Musics</a></div>
-        <div><a href={url} >Settings</a></div>
+        <div><a href='/news' >News</a></div>
+        <div><a href='/musics' >Musics</a></div>
+        <div><a href='/settings'>Settings</a></div>
       </div>
     )
     
