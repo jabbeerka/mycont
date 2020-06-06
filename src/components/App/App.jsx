@@ -2,9 +2,12 @@ import React from 'react';
 import styles from './App.module.scss';
 import Navigator from '../Nav';
 import Header from '../Header';
-import Profile from '../Profile';
+import Profile from '../Pages/Profile';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Dialogs from '../Dialogs';
+import Dialogs from '../Pages/Dialogs';
+import News from '../Pages/News';
+import Musics from '../Pages/Musics';
+import Settings from '../Pages/Settings';
 
 
 function App() {
@@ -16,6 +19,9 @@ function App() {
       <Navigator />
       <Route path="/profile" component= { Profile } />
       <Route path="/dialogs" component= { Dialogs } />
+      <Route path="/news" component= { News } />
+      <Route path="/musics" component= { Musics } />
+      <Route path="/settings" component= { Settings } />
     </div>
     </BrowserRouter>
   )

@@ -3,7 +3,7 @@ import styles from './MyHeader.module.sass';
 const MyHeader = () => {
     return (
         <>
-        <img src="https://c.radikal.ru/c41/2006/80/0a82b479527e.jpg" alt="bgimage" className={styles.img}/>
+        <img src="https://b.radikal.ru/b15/2006/2f/ee55947d163e.png" alt="bgimage" className={styles.img}/>
         </>
     )
 }

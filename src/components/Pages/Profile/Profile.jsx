@@ -3,7 +3,7 @@ import styles from './Profile.module.sass';
 import MyHeader from './MyHeader';
 import MyInfo from './MyInfo';
 import MyPost from './Post/MyPost';
-import SendPost from './SendPost';
+import SendPost from './Post/SendPost';
 
 
 
@@ -13,10 +13,7 @@ const Profile = () => {
         <MyHeader/>
         <MyInfo/>
         <SendPost/>
-        <MyPost
-        message="Hello, Are you watch me ?"/>
-        <MyPost
-        message="I'm start learning to React!"/>
+        <MyPost />
       </div>
     )
 }
