@@ -3,14 +3,29 @@ import styles from './Nav.module.sass';
 import { NavLink } from 'react-router-dom';
 
 
-const Navigator = ({url}) => {
+const Navigator = ({state}) => {
+  let data = state.links.map(item => 
+    <div className={styles.link}>
+      <NavLink to={item.link} activeClassName={styles.active}>
+        {item.name}
+      </NavLink>
+    </div>
+    )
+  let friendsZone = state.friends.map(item => 
+    <div className={styles.img_wrap}>
+      <img src={item.img} alt="p_icon"/>
+      <span>{item.name}</span>
+    </div>
+  )
+
     return(
         <div className={styles.nav}>
-        <div className={styles.link}><NavLink to='/profile' activeClassName= {styles.active}>Profile</NavLink></div>
-        <div className={styles.link}><NavLink to='/dialogs' activeClassName= {styles.active}>Dialogs</NavLink></div>
-        <div className={styles.link}><NavLink to='/news' activeClassName= {styles.active}>News</NavLink></div>
-        <div className={styles.link}><NavLink to='/musics' activeClassName= {styles.active}>Musics</NavLink></div>
-        <div className={styles.link}><NavLink to='/settings' activeClassName= {styles.active}>Settings</NavLink></div>
+          {data}
+        <div className={styles.header}> Friends online:</div>
+        <div className={styles.wrap}>
+          {friendsZone}
+        </div>
+        
       </div>
     )
     

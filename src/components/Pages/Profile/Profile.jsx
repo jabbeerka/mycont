@@ -7,13 +7,13 @@ import SendPost from './Post/SendPost';
 
 
 
-const Profile = () => {
+const Profile = ({state}) => {
     return (
       <div className={styles.content}>
         <MyHeader/>
         <MyInfo/>
         <SendPost/>
-        <MyPost />
+        <MyPost posts={state.postsArr}/>
       </div>
     )
 }
