@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from './Musics.module.sass';
-import MusicsHeader from './MusicsHeader';
 
 
-const Musics = () => {
+const Musics = ({header}) => {
     return (
         <div className={styles.content}>
-            <MusicsHeader />
+            <img src={header.imgs[2].bgimage} alt="bgimage" className={styles.img}/>
         </div>
     );
 } 

@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from './News.module.sass';
-import NewsHeader from './NewsHeader';
 
 
-const News = () => {
+const News = ({header}) => {
     return (
         <div className={styles.content}>
-            <NewsHeader />
+            <img src={header.imgs[3].bgimage} alt="bgimage" className={styles.img}/>
         </div>
     );
 } 

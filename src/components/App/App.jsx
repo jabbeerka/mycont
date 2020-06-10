@@ -9,21 +9,19 @@ import News from '../Pages/News';
 import Musics from '../Pages/Musics';
 import Settings from '../Pages/Settings';
 
-function App(props) {
+let App = (props) =>  {
   return (
     <BrowserRouter>
     <div className={styles.body}>
-      <Header
-      src="https://d.radikal.ru/d20/2006/92/33c0a53ae79b.png" />
+      <Header />
       <Navigator state={props.state.navPage}/>
-      <Route path="/profile" render= {() => <Profile state={props.state.profilePage}/> } />
-      <Route path="/dialogs" render={() => <Dialogs state={props.state.messagesPage}/>} />
-      <Route path="/news" component= { News } />
-      <Route path="/musics" component= { Musics } />
-      <Route path="/settings" component= { Settings } />
+      <Route path="/profile" render= {() => <Profile state={props.state.profilePage} addPost={props.addPost} header={props.state.headers} /> } />
+      <Route path="/dialogs" render={() => <Dialogs state={props.state.messagesPage} header={props.state.headers}/>} />
+      <Route path="/news" render={() => <News header={props.state.headers}/>}/>
+      <Route path="/musics" render={() => <Musics header={props.state.headers}/>}/>
+      <Route path="/settings" render={() => <Settings header={props.state.headers}/>}/>
     </div>
     </BrowserRouter>
   )
 }
-
 export default App;

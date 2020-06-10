@@ -17,11 +17,11 @@ const Navigator = ({state}) => {
       <span>{item.name}</span>
     </div>
   )
-
     return(
+      
         <div className={styles.nav}>
           {data}
-        <div className={styles.header}> Friends online:</div>
+        <div className={styles.header}> <hr></hr>Friends online:</div>
         <div className={styles.wrap}>
           {friendsZone}
         </div>
