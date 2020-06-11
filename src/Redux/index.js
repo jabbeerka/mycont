@@ -14,6 +14,9 @@ const state = {
         postsArr : [
             { id: 1, message: "Hello, Are you watch me ?", likes: 5},
             { id: 2, message: "I'm start learning to React!", likes: 6},
+        ],
+        inputArea: [
+            {inputText: ""}
         ]
     },
     messagesPage : {
@@ -47,16 +50,20 @@ const state = {
           ]
     }
 }
-export let addPost = (post) => {
-    debugger;
+export let changeNewInput = (text) => {
+    state.profilePage.inputArea.inputText = text
+}
+export let addPost = () => {
     let newPost = {
         id: 3,
-        message: post,
+        message: state.profilePage.inputArea.inputText,
         likes: 0
     };
     state.profilePage.postsArr.push(newPost);
     renderEntireDom(state);
+    state.profilePage.inputArea.inputText = ""
 }
+
 
 
 
