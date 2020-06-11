@@ -15,9 +15,8 @@ let store = {
                 { id: 1, message: "Hello, Are you watch me ?", likes: 5},
                 { id: 2, message: "I'm start learning to React!", likes: 6},
             ],
-            inputArea: [
-                {inputText: ""}
-            ]
+            inputArea: "your message"
+                 
         },
         messagesPage : {
             namesArr: [
@@ -53,21 +52,23 @@ let store = {
     getState() {
         return this._state;
     },
-    _renderEntireDom() {
+    renderEntireDom() {
         console.log("change observer")
-    },
-    changeNewInput(text) {
-        this._state.profilePage.inputArea.inputText = text
     },
     addPost() {
         let newPost = {
             id: 3,
-            message: this._state.profilePage.inputArea.inputText,
+            message: this._state.profilePage.inputArea,
             likes: 0
         }
         this._state.profilePage.postsArr.push(newPost);
         this._renderEntireDom(this._state);
-        this._state.profilePage.inputArea.inputText = ""
+        this._state.profilePage.inputArea = "";
+    },
+    changeNewInput(text) {
+        this._state.profilePage.inputArea = text;
+        this._renderEntireDom(this._state);
+
     },
     subscribe(observer) {
         this._renderEntireDom = observer;
