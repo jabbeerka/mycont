@@ -11,7 +11,7 @@ const Profile = (props) => {
       <div className={styles.content}>
         <img src={props.header.imgs[0].bgimage} alt="bgimage" className={styles.img}/>
         <MyInfo/>
-        <SendPost addPost={props.addPost} newTextArea={props.state.inputArea} changeNewInput={props.changeNewInput}/>
+        <SendPost dispatch={props.dispatch} newTextArea={props.state.inputArea}/>
         <MyPost posts={props.state.postsArr}/>
       </div>
     )

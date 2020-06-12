@@ -17,7 +17,7 @@ let App = (props) =>  {
       <Navigator state={props.state.navPage}/>
       <Route 
       path="/profile" 
-      render= {() => <Profile state={props.state.profilePage} addPost={props.addPost} header={props.state.headers} changeNewInput={props.changeNewInput} /> } />
+      render= {() => <Profile state={props.state.profilePage} dispatch={props.dispatch} header={props.state.headers} /> } />
       <Route path="/dialogs" render={() => <Dialogs state={props.state.messagesPage} header={props.state.headers}/>} />
       <Route path="/news" render={() => <News header={props.state.headers}/>}/>
       <Route path="/musics" render={() => <Musics header={props.state.headers}/>}/>

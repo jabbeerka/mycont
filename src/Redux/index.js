@@ -55,25 +55,24 @@ let store = {
     renderEntireDom() {
         console.log("change observer")
     },
-    addPost() {
-        let newPost = {
-            id: 3,
-            message: this._state.profilePage.inputArea,
-            likes: 0
-        }
-        this._state.profilePage.postsArr.push(newPost);
-        this._renderEntireDom(this._state);
-        this._state.profilePage.inputArea = "";
-    },
-    changeNewInput(text) {
-        this._state.profilePage.inputArea = text;
-        this._renderEntireDom(this._state);
-
-    },
     subscribe(observer) {
         this._renderEntireDom = observer;
     },
-    
+    dispatch (action) {
+        if (action.type === "ADD-POST") {
+            let newPost = {
+                id: 3,
+                message: this._state.profilePage.inputArea,
+                likes: 0
+            }
+            this._state.profilePage.postsArr.push(newPost);
+            this._renderEntireDom(this._state);
+            this._state.profilePage.inputArea = "";
+        } else if (action.type === "CHANGE-NEW-INPUT") {
+            this._state.profilePage.inputArea = action.text;
+            this._renderEntireDom(this._state);
+        }
+    },
 
 }
 export default store;

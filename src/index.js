@@ -8,8 +8,7 @@ import App from './components/App/App';
 const renderEntireDom = (state) => {
     ReactDOM.render(<App 
         state={state} 
-        addPost={store.addPost.bind(store)} 
-        changeNewInput={store.changeNewInput.bind(store)}
+        dispatch={store.dispatch.bind(store)}
         />, document.getElementById('root')
 );
 }
