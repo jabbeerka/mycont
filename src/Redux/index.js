@@ -15,7 +15,7 @@ let store = {
                 { id: 1, message: "Hello, Are you watch me ?", likes: 5},
                 { id: 2, message: "I'm start learning to React!", likes: 6},
             ],
-            inputArea: "your message"
+            inputArea: ""
                  
         },
         messagesPage : {
@@ -27,12 +27,13 @@ let store = {
                 {name: 'Jahon', id: 5} 
             ],
             messagesArr : [
-                {message: "Hello, my Dear!", id: 1}, 
-                {message: "I like you!", id: 2}, 
-                {message: "What are you doing?", id: 3}, 
-                {message: "Whats Happened", id: 4}, 
-                {message: "Where is my daughter?", id: 5},
+                {id: 1, message: "Hello, my Dear!"}, 
+                {id: 2, message: "I like you!"}, 
+                {id: 3, message: "What are you doing?"}, 
+                {id: 4, message: "Whats Happened", }, 
+                {id: 5, message: "Where is my daughter?"}
             ],
+            inputMessageArea: ""
         },
         navPage: {
             links: [
@@ -71,8 +72,27 @@ let store = {
         } else if (action.type === "CHANGE-NEW-INPUT") {
             this._state.profilePage.inputArea = action.text;
             this._renderEntireDom(this._state);
+        } else if (action.type === "ADD-MESSAGE") {
+            let newMessage = {
+                id: 7,
+                message: this._state.messagesPage.inputMessageArea
+            }
+            this._state.messagesPage.messagesArr.push(newMessage);
+            this._renderEntireDom(this._state);
+            this._state.messagesPage.inputMessageArea = "";
+        } else if (action.type === "CHANGE-MESSAGE-INPUT") {
+            this._state.messagesPage.inputMessageArea = action.text;
+            this._renderEntireDom(this._state);
         }
     },
 
 }
+const ADD_POST = "ADD-POST",
+      CHANGE_NEW_INPUT = "CHANGE-NEW-INPUT",
+      ADD_MESSAGE = "ADD-MESSAGE",
+      CHANGE_MESSAGE_INPUT = "CHANGE-MESSAGE-INPUT";
+export const addPostActionCreator = () => ({type: ADD_POST});
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
+export const changeNewInputActionCreator = (text) => ({type: CHANGE_NEW_INPUT, text: text});
+export const changeMessageInputActionCreator = (text) => ({type: CHANGE_MESSAGE_INPUT, text: text});
 export default store;

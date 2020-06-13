@@ -2,13 +2,23 @@ import React from 'react';
 import styles from './Dialogs.module.sass';
 import Messages from './Messages';
 import Names from './Names';
+import {changeMessageInputActionCreator, addMessageActionCreator} from '../../../Redux';
 
-const Dialogs = ({state, header}) => {
-    let namesObj = state.namesArr.map( n => <Names name={n.name} id={n.id} />)
-    let messagesObj = state.messagesArr.map( m => <Messages message={m.message} id={m.id} />)
+const Dialogs = (props) => {
+    let namesObj = props.state.messagesPage.namesArr.map( n => <Names name={n.name} id={n.id} />);
+    let messagesObj = props.state.messagesPage.messagesArr.map( m => <Messages message={m.message} id={m.id} />);
+    let newElem = React.createRef()
+    let sendMessage = () => {
+        props.dispatch(addMessageActionCreator())
+    }
+    let changeInput = () => {
+        let text = newElem.current.value;
+        props.dispatch(changeMessageInputActionCreator(text))
+    }
+
     return (
         <div className={styles.content}>
-            <img src={header.imgs[1].bgimage} alt="bgimage" className={styles.img}/>
+            <img src={props.state.headers.imgs[1].bgimage} alt="bgimage" className={styles.img}/>
             <div className={styles.dialogs}>
                 <ul className={styles.dialogs__names}>
                     {namesObj}
@@ -16,8 +26,8 @@ const Dialogs = ({state, header}) => {
 
                 <div className={styles.dialogs__messages}>
                     {messagesObj}
-                    <textarea placeholder="message..." name="messages" id="2" cols="5" rows="5"></textarea>
-                    <button className={styles.dialogs__button}>Send</button>
+                    <textarea onChange={ changeInput } ref={newElem} name="messages" cols="5" rows="5" value={props.state.messagesPage.inputMessageArea}></textarea>
+                    <button onClick={ sendMessage } className={styles.dialogs__button}>Send</button>
                 </div>
             </div>
             

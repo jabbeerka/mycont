@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './SendPost.module.sass';
+import {addPostActionCreator, changeNewInputActionCreator} from '../../../../../Redux';
 
 
 
 const SendPost = (props) => {
     let newSelector = React.createRef();
     let addNewPost = () => {
-      props.dispatch({type: "ADD-POST"});
+      props.dispatch(addPostActionCreator());
     }
     let changeInput = () =>  {
     let text = newSelector.current.value;
-    props.dispatch({type: "CHANGE-NEW-INPUT", text: text});
+    props.dispatch(changeNewInputActionCreator(text));
     }
     return (
       <section className= {styleMedia.prof__post}>
