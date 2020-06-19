@@ -1,5 +1,5 @@
 import './index.css';
-import store from './Redux';
+import store from './Redux/redux-store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -12,8 +12,11 @@ const renderEntireDom = (state) => {
         />, document.getElementById('root')
 );
 }
-export default renderEntireDom;
 renderEntireDom(store.getState());
-store.subscribe(renderEntireDom);
+
+store.subscribe(()=> {
+    let state = store.getState();
+    renderEntireDom(state);
+})
     
 

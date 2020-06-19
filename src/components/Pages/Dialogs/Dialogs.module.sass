@@ -1,16 +1,17 @@
-a:hover
-    color: #FFA700
-    text-decoration: none
+
 .content
     background-color: #F8FEFE
     min-height: 600px
 .dialogs
     display: grid
     grid-template-columns: 2fr 3fr
-    &__names 
+    &__names
         padding: 40px
         a
             text-decoration: none
+            color: black
+        &_active
+            color: red
     &__name
         display: block
         padding: 5px
@@ -19,7 +20,7 @@ a:hover
         font-weight: 600
         margin-bottom: 30px
         color: gray
-        &_active
+        &__active
             font-size: 23px
             font-weight: 800
             transition: 0.3s all

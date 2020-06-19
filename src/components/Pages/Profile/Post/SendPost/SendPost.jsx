@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SendPost.module.sass';
-import {addPostActionCreator, changeNewInputActionCreator} from '../../../../../Redux';
+import {addPostActionCreator, changeNewInputActionCreator} from '../../../../../Redux/profile-page-reducer';
 
 
 

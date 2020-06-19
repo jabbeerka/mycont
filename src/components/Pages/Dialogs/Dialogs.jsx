@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Dialogs.module.sass';
 import Messages from './Messages';
 import Names from './Names';
-import {changeMessageInputActionCreator, addMessageActionCreator} from '../../../Redux';
+import {changeMessageInputActionCreator, addMessageActionCreator} from '../../../Redux/dialogs-page-reducer';
 
 const Dialogs = (props) => {
     let namesObj = props.state.messagesPage.namesArr.map( n => <Names name={n.name} id={n.id} />);
@@ -20,7 +20,7 @@ const Dialogs = (props) => {
         <div className={styles.content}>
             <img src={props.state.headers.imgs[1].bgimage} alt="bgimage" className={styles.img}/>
             <div className={styles.dialogs}>
-                <ul className={styles.dialogs__names}>
+                <ul className={styles.dialogs__names} activeClassName={styles.dialogs__names_active} >
                     {namesObj}
                 </ul>
 
