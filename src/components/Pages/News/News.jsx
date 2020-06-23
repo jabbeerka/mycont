@@ -1,12 +1,19 @@
 import React from 'react';
 import styles from './News.module.sass';
+import storeContext from '../../../Redux/store-context';
 
 
-const News = ({header}) => {
+const News = () => {
     return (
-        <div className={styles.content}>
-            <img src={header.imgs[3].bgimage} alt="bgimage" className={styles.img}/>
-        </div>
+        <storeContext.Consumer>
+            {(store)=> {
+                return (
+                    <div className={styles.content}>
+                        <img src={store.getState().headers.imgs[3].bgimage} alt="bgimage" className={styles.img}/>
+                    </div>
+                )
+            }}
+        </storeContext.Consumer>
     );
 } 
 

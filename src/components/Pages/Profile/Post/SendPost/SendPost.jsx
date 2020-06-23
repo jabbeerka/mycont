@@ -1,17 +1,16 @@
 import React from 'react';
 import styles from './SendPost.module.sass';
-import {addPostActionCreator, changeNewInputActionCreator} from '../../../../../Redux/profile-page-reducer';
 
 
 
 const SendPost = (props) => {
     let newSelector = React.createRef();
     let addNewPost = () => {
-      props.dispatch(addPostActionCreator());
+      props.addPostActionCreator();
     }
     let changeInput = () =>  {
     let text = newSelector.current.value;
-    props.dispatch(changeNewInputActionCreator(text));
+    props.changeNewInput(text);
     }
     return (
       <section className= {styleMedia.prof__post}>
