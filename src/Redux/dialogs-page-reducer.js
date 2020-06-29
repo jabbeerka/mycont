@@ -26,12 +26,16 @@ const dialogsPageReducer = (state = initialState, action) => {
                 id: 7,
                 message: state.inputMessageArea
             }
-            state.inputMessageArea = "";
-            state.messagesArr.push(newMessage);
-            return state;
-        case CHANGE_MESSAGE_INPUT: 
-            state.inputMessageArea = action.text;
-            return state;
+            return {
+                ...state,
+                inputMessageArea: "",
+                messagesArr: [...state.messagesArr, newMessage]
+            }
+        case CHANGE_MESSAGE_INPUT:
+            return {
+                ...state,
+                inputMessageArea: action.text
+            }
         default :
             return state;
     }

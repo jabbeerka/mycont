@@ -1,19 +1,12 @@
 import React from 'react';
 import styles from './Settings.module.sass';
-import storeContext from '../../../Redux/store-context'
 
-const Settings = ({header} ) => {
+const Settings = (props) => {
     return (
-        <storeContext.Consumer>
-            {(store)=> {
-                return (
-                    <div className={styles.content}>
-                        <img src={store.getState().headers.imgs[4].bgimage} alt="bgimage" className={styles.img}/>
-                    </div>
-                )
-            }}
-        </storeContext.Consumer>
-    );
+            <div className={styles.content}>
+                <img src={props.img} alt="bgimage" className={styles.img}/>
+            </div>
+            )
 } 
 
 export default Settings;

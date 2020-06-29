@@ -9,6 +9,9 @@ let initialState = {
 }
 
 const headersReducer = (state = initialState, action) => {
-    return state;
+
+    return {
+        ...state
+    };
 }
 export default headersReducer;

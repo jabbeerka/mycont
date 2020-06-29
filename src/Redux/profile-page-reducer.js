@@ -13,22 +13,24 @@ let initialState = {
 
 const profilePageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: 
             let newPost = {
                 id: 3,
                 message: state.inputArea,
                 likes: 0
             }
-            state.postsArr.push(newPost);
-            state.inputArea = "";
-            return state;
+            return {
+                ...state,
+                postsArr: [...state.postsArr, newPost],
+                inputArea: ""
+            }
         case CHANGE_NEW_INPUT: 
-            state.inputArea = action.text;
-            return state;
+            return {
+                ...state,
+                inputArea: action.text
+            }
         default:
             return state;
-
-    
     }
 }
 export const addPostActionCreator = () => ({type: ADD_POST});
