@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 
 let mapStateToProps = (state) => {
-    let post = state.profilePage.postsArr.map(m => <Posts message={m.message} likes={m.likes} id={m.id}/>);
+    let post = state.profilePage.postsArr.map(m => <Posts message={m.message} likes={m.likes} key={m.id}/>);
     return {
         posts: post
     }

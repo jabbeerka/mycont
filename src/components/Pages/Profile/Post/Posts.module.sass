@@ -1,15 +1,26 @@
 .prof
     &__news
-        margin-top: 50px
-        padding: 15px
         &_img
             width: 50px
         &_title
-            display: inline-block
-            margin-left: 15px
-            margin-bottom: 50px
+            display: flex
+            align-items: center
             font-size: 20px
     &__likes
+        display: flex
+        align-self: end
         font-size: 15px
         font-style: italic
         color: gray
+    &__like_img
+        width: 20px
+        display: flex
+        align-self: end
+.wrap
+    display: grid
+    grid-template-columns: 1fr 4fr 0fr 1fr
+    padding: 15px
+    border: 1px solid #f0f0f0
+    border-radius: 15px
+    margin-bottom: 20px
+    width: 50%

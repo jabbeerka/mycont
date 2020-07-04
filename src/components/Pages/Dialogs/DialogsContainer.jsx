@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 
 let mapStateToProps = (state) => {
     let inputValue = state.messagesPage.inputMessageArea
-    let namesObj = state.messagesPage.namesArr.map( n => <Names name={n.name} id={n.id} />);
-    let messagesObj = state.messagesPage.messagesArr.map( m => <Messages message={m.message} id={m.id} />);
+    let namesObj = state.messagesPage.namesArr.map( n => <Names name={n.name} id={n.id} key={n.id}/>);
+    let messagesObj = state.messagesPage.messagesArr.map( m => <Messages message={m.message} id={m.id} key={m.id}/>);
     let header = state.headers.imgs[1].bgimage
     return {
         names: namesObj,

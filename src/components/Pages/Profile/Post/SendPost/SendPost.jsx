@@ -4,7 +4,6 @@ import styles from './SendPost.module.sass';
 
 
 const SendPost = (props) => {
-  console.log(props.newInput)
     let newSelector = React.createRef();
     let newPost = () => {
       props.newPost();

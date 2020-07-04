@@ -7,13 +7,13 @@ import { connect } from 'react-redux';
 let mapStateToProps = (state) => {
   return {
     friends: state.navPage.friends.map(item =>
-      <div className={styles.img_wrap}>
+      <div className={styles.img_wrap} key={item.id}>
         <img src={item.img} alt="p_icon"/>
         <span>{item.name}</span>
       </div>
     ),
     links: state.navPage.links.map(item => 
-      <div className={styles.link}>
+      <div className={styles.link} key={item.id}>
         <NavLink to={item.link} activeClassName={styles.active}>
           {item.name}
         </NavLink>

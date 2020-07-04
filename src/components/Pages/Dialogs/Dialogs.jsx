@@ -21,7 +21,6 @@ const Dialogs = (props) => {
                 <ul className={styles.dialogs__names}>
                     {props.names}
                 </ul>
-
                 <div className={styles.dialogs__messages}>
                     {props.messages}
                     <textarea onChange={ changeInput } ref={newElem} name="messages" cols="5" rows="5" value={props.inputValue}></textarea>
