@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import News from './News';
-
+import header from '../../../images/news-header.png'
 
 let mapStateToProps = (state) => {
     return {
-        img: state.headers.imgs[3].bgimage
+        header: header
     }
 }
 const NewsContainer = connect(mapStateToProps)(News)

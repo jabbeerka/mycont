@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './Header.module.sass';
+import logo from '../../images/logo.png'
 
 const Header = () => {
     return (
         <div className={styles.header}>
         <img
-        src="https://b.radikal.ru/b42/2006/c4/9adcba91f63a.png"
+        src={logo}
         className={styles.logo}
         alt="header" />
         </div>

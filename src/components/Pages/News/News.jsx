@@ -5,7 +5,7 @@ import styles from './News.module.sass';
 const News = (props) => {
         return (
             <div className={styles.content}>
-                <img src={props.img} alt="bgimage" className={styles.img}/>
+                <img src={props.header} alt="bgimage" className={styles.img}/>
             </div>
         )  
 }

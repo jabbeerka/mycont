@@ -4,12 +4,12 @@ import Names from './Names';
 import {changeMessageInputActionCreator, addMessageActionCreator} from '../../../Redux/dialogs-page-reducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
+import header from '../../../images/dialogs-header.png'
 
 let mapStateToProps = (state) => {
     let inputValue = state.messagesPage.inputMessageArea
     let namesObj = state.messagesPage.namesArr.map( n => <Names name={n.name} id={n.id} key={n.id}/>);
     let messagesObj = state.messagesPage.messagesArr.map( m => <Messages message={m.message} id={m.id} key={m.id}/>);
-    let header = state.headers.imgs[1].bgimage
     return {
         names: namesObj,
         messages:messagesObj, 

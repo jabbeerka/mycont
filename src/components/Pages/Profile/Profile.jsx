@@ -9,7 +9,7 @@ import MyPostContainer from './Post/MyPost/MyPostContainer'
 const Profile = (props) => {
   return (
           <div className={styles.content}>
-          <img src={props.img} alt="bgimage" className={styles.img}/>
+          <img src={props.header} alt="header" className={styles.img}/>
           <MyInfo/>
           <SendPostContainer />
           <MyPostContainer />

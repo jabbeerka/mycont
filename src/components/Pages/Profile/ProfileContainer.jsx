@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import Profile from './Profile';
+import header from '../../../images/profile-header.png'
 
-let mapStateToProps = (state) => {
+let mapStateToProps = () => {
   return {
-    img: state.headers.imgs[0].bgimage
+    header: header
   }
 }
 const ProfileContainer = connect(mapStateToProps)(Profile)

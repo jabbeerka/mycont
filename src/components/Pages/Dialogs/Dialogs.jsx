@@ -16,7 +16,7 @@ const Dialogs = (props) => {
 
     return (
         <div className={styles.content}>
-            <img src={props.header} alt="bgimage" className={styles.img}/>
+            <img src={props.header} alt="header" className={styles.img}/>
             <div className={styles.dialogs}>
                 <ul className={styles.dialogs__names}>
                     {props.names}

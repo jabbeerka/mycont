@@ -1,3 +1,5 @@
+
+
 let initialState = {
     links: [
         {id:1, link: '/profile', name: 'Profile'},
@@ -9,7 +11,7 @@ let initialState = {
       ],
       friends: [
         {id: 1, name: 'Jahon', img: "https://b.radikal.ru/b28/2006/45/b905d323ec3f.png"},
-        {id: 2, name: 'Julia', img: "http://c.radikal.ru/c25/2006/42/9ddbb593e557.png"},
+        {id: 2, name: 'Julia', img: "https://b.radikal.ru/b28/2006/45/b905d323ec3f.png"},
         {id: 3, name: 'Miron', img: "https://b.radikal.ru/b28/2006/45/b905d323ec3f.png"}
       ]
 }

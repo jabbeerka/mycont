@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import Musics from './Musics';
+import header from '../../../images/musics-header.png'
 
 
-let mapStateToProps = (state) => {
+let mapStateToProps = () => {
     return {
-        img: state.headers.imgs[2].bgimage
+        header: header
     }
 }
 const MusicsContainer = connect(mapStateToProps)(Musics)

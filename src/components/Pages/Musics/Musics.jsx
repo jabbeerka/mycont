@@ -4,7 +4,7 @@ import styles from './Musics.module.sass';
 const Musics = (props) => {
         return (
             <div className={styles.content}>
-                <img src={props.img} alt="bgimage" className={styles.img}/>
+                <img src={props.header} alt="header" className={styles.img}/>
             </div>
         )
 } 

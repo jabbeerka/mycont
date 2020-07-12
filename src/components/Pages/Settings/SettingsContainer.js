@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import Settings from './Settings';
+import header from '../../../images/settings-header.png';
 
 
 let mapStateToProps = (state) => {
     return {
-        img: state.headers.imgs[4].bgimage
+        header: header
     }
 }
 const SettingsContainer = connect(mapStateToProps)(Settings)
