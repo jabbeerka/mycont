@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from './Users.module.sass'
+import Perloader from './UsersBlock/Perloader';
+import { NavLink } from 'react-router-dom';
 
 
 const Users = (props) => {
@@ -8,7 +10,7 @@ const Users = (props) => {
         for (let i=1; i<= pageCount; i++) {
             if (i<10) {
                 pages.push(`0${i}`)
-            }
+            } 
             else {
                 pages.push(i)
             }
@@ -20,8 +22,10 @@ const Users = (props) => {
             props.users.map((u)=> 
                 <div key={u.id} className={styles.user}>
                     <div></div>
-                    <div className={styles.left_wrap}> 
+                    <div className={styles.left_wrap}>
+                        <NavLink to={/profile/ + u.id}>
                         <img src={ u.photos.small != null ? u.photos.small : props.avatar } alt="avatar" className={styles.avatar}/>
+                        </NavLink>
                         {u.follow 
                         ? <button onClick={()=> props.unFollow(u.id)} className={styles.follow_btn} >Follow</button> 
                         : <button onClick={()=>props.follow(u.id)} className={styles.follow_btn} >Unfollow</button>}
@@ -39,6 +43,9 @@ const Users = (props) => {
                 </div>
             )
         }
+        <div>
+            {props.isFetching? <Perloader/> : null}
+        </div>
         <div className={styles.current_page}>
             {pages.map((p)=>{return(<span 
                 onClick={()=> props.setCurrentPage(p)}
