@@ -3,7 +3,7 @@ import styles from './Perloader.module.sass';
 import perloader from '../../../../images/loader.gif'
 
 
-const Perloader = (props) => {
+let Perloader = (props) => {
     return (
         <img src={perloader} alt="perloader" className={styles.perloader}/>
     )

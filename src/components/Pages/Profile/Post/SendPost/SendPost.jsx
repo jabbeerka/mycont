@@ -6,11 +6,11 @@ import styles from './SendPost.module.sass';
 const SendPost = (props) => {
     let newSelector = React.createRef();
     let newPost = () => {
-      props.newPost();
+      props.addPost();
     }
     let changeInput = () =>  {
     let text = newSelector.current.value;
-    props.newInput(text);
+    props.changeNewInput(text);
     }
     return (
       <section className= {styleMedia.prof__post}>

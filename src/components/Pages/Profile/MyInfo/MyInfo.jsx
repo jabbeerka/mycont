@@ -1,14 +1,26 @@
 import React from 'react';
 import styles from './MyInfo.module.sass';
-import avatar from '../../../../images/profile-avatar.png'
+import Perloader from '../../Users/UsersBlock/Perloader';
+import avatar from '../../../../images/users-avatar.png'
 
-const MyInfo = () => {
+const MyInfo = ({profile}) => {
+  if (!profile) {
+      return <Perloader/>
+  }
+  console.log(profile)
     return (
       <section className={styles.prof}> 
-        <img src={avatar} alt="avatar" className={styles.prof__avatar}/>
+        <img src={profile.photos.large || avatar} alt="avatar" className={styles.prof__avatar}/>
         <div className={styles.prof__wrap}>
-        <span className={styles.prof__name}>J.Kholikov</span> <br/>
-        <span className={styles.prof__info}>Date of Birthday: 16.10.1990 <br/> City: Moscow <br/> Job: Web Developer <br/> Web-site: www.jaykors.com</span>
+    <span className={styles.prof__name}> {profile.fullName} </span> <br/>
+        <span className={styles.prof__info}> 
+          About me: {profile.aboutMe}<br/> 
+          vk: {profile.contacts.vk} <br/>
+          github: {profile.contacts.github} <br/>
+          twitter: {profile.contacts.twitter} <br/>
+          instagram: {profile.contacts.instagram} <br/>
+          Job: {profile.lookingForAJobDescription} <br/>
+        </span>
         </div>
       </section>
     )

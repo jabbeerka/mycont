@@ -1,5 +1,5 @@
-const ADD_MESSAGE = "ADD-MESSAGE",
-      CHANGE_MESSAGE_INPUT = "CHANGE-MESSAGE-INPUT";
+const ADD_MESSAGE = "ADD_MESSAGE",
+      CHANGE_MESSAGE_INPUT = "CHANGE_MESSAGE_INPUT";
 
 let initialState = {
     namesArr: [

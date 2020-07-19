@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import header from '../../../images/profile-header.png'
+import header from '../../../images/profile-header.png';
+
+
 
 let mapStateToProps = () => {
   return {

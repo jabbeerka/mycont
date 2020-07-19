@@ -16,7 +16,7 @@ let App = () =>  {
     <div className={styles.body}>
       <Header />
       <NavContainer/>
-      <Route path="/profile" render= {() => <ProfileContainer /> } />
+      <Route path="/profile/:userId?" render= {() => <ProfileContainer /> } />
       <Route path="/dialogs" render={() => <DialogsContainer />} />
       <Route path="/news" render={() => <NewsContainer />} />
       <Route path="/musics" render={() => <MusicsContainer/>}/>
