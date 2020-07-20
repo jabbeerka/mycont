@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './App.module.scss';
 import Navigator from '../Nav';
-import Header from '../Header';
 import Profile from '../Pages/Profile/';
 import { BrowserRouter, Route } from 'react-router-dom';
 import News from '../Pages/News/';
@@ -9,6 +8,7 @@ import Musics from '../Pages/Musics/';
 import Settings from '../Pages/Settings/';
 import Dialogs from '../Pages/Dialogs/';
 import Users from '../Pages/Users/';
+import Header from '../Header/';
 
 let App = () =>  {
   return (

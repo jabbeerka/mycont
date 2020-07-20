@@ -24,7 +24,7 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map( (user) => {
                     if (user.id === action.userId) {
-                        return {...user, follow: true}
+                        return {...user, followed: true}
                     }
                     return user
                 })
@@ -34,7 +34,7 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map( (user) => {
                     if (user.id === action.userId) {
-                        return {...user, follow: false}
+                        return {...user, followed: false}
                     }
                     return user
                 })
@@ -51,7 +51,7 @@ const usersPageReducer = (state = initialState, action) => {
             }
         case SET_TOTAL_USERS_COUNT:
             if (action.totalUsersCount > 100 ){
-                action.totalUsersCount = 99;
+                action.totalUsersCount = 100;
                 return {
                     ...state, totalUsersCount: action.totalUsersCount
                 }
