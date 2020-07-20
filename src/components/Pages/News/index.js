@@ -1,2 +1,2 @@
-import News from './News';
+import News from './NewsContainer';
 export default News;

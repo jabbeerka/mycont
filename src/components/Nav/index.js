@@ -1,2 +1,2 @@
-import Navigator from './Nav'
+import Navigator from './NavContainer'
 export default Navigator;

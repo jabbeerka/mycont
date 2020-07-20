@@ -1,9 +1,0 @@
-{
-    "users": [
-        { "id": 1, "follow": true, "name": "Eugeniy", "status": "Hello, Are you watch me ?","location": {"country": "Russia", "city": "Moscow"}},
-        { "id": 2, "follow": true, "name": "Julia", "status": "I'm start learning to React!","location": {"country": "Russia", "city": "Moscow"}},
-        { "id": 3, "follow": true, "name": "Dmitry", "status": "Follow me!","location": {"country": "Russia", "city": "Sochi"}},
-        { "id": 4, "follow": true, "name": "Jaxon", "status": "I'm focusing!","location": {"country": "Uzbekhistan", "city": "Tashkent"}}
-    ]
-}
-   

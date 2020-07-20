@@ -1,2 +1,2 @@
-import Dialogs from './Dialogs';
+import Dialogs from './DialogsContainer';
 export default Dialogs;

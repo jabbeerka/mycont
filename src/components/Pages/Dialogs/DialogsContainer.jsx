@@ -1,10 +1,10 @@
 import React from 'react';
 import Messages from './Messages';
 import Names from './Names';
-import {changeMessageInputActionCreator, addMessageActionCreator} from '../../../Redux/dialogs-page-reducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
-import header from '../../../images/dialogs-header.png'
+import {changeMessageInputActionCreator, addMessageActionCreator} from '../../../Redux/dialogs-page-reducer';
+import header from '../../../images/dialogs-header.png';
 
 let mapStateToProps = (state) => {
     let inputValue = state.messagesPage.inputMessageArea

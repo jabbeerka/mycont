@@ -1,2 +1,2 @@
-import MyPost from './MyPost'
+import MyPost from './MyPostContainer'
 export default MyPost;

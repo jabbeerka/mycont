@@ -1,2 +1,2 @@
-import Musics from './Musics';
+import Musics from './MusicsContainer';
 export default Musics;

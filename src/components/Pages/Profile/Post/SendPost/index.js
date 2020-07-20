@@ -1,2 +1,2 @@
-import SendPost from './SendPost'
+import SendPost from './SendPostContainer'
 export default SendPost;

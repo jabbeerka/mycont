@@ -1,2 +1,2 @@
-import MyInfo from './MyInfo'
+import MyInfo from './MyInfoContainer'
 export default MyInfo;
