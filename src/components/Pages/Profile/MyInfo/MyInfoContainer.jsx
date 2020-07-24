@@ -2,8 +2,8 @@ import React from 'react';
 import MyInfo from './MyInfo';
 import { connect } from 'react-redux';
 import {setUserProfile} from '../../../../Redux/profile-page-reducer';
-import * as axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { getProfileRequestAPI } from '../../../../API/API';
 
 class MyInfoContainer extends React.Component {
     componentDidMount() {
@@ -11,13 +11,8 @@ class MyInfoContainer extends React.Component {
         if (!userId) {
             userId = 2
         }
-        axios
-        .get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId,
-        {
-            withCredentials: true
-        })
-        .then (response => {
-                this.props.setUserProfile(response.data)
+        getProfileRequestAPI(userId).then (data => {
+                this.props.setUserProfile(data)
             })
     }
     render() {

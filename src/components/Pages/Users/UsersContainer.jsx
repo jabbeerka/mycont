@@ -3,55 +3,33 @@ import { connect } from 'react-redux';
 import {follow, unFollow, getUsers, setPage, setTotalUsers, toggleIsFetching} from '../../../Redux/users-page-reducer';
 import header from '../../../images/users-header.png';
 import userAvatar from '../../../images/users-avatar.png';
-import * as axios from 'axios';
 import Users from './Users';
+import { getRequestAPI, followRequest } from '../../../API/API';
 
 
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        axios
-        .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, 
-        {
-            withCredentials: true
-        })
-        .then (response => {
-            this.props.toggleIsFetching(false)
-                this.props.getUsers(response.data.items);
-                this.props.setTotalUsers(response.data.totalCount)
+        this.props.toggleIsFetching(true);
+        getRequestAPI(this.props.currentPage, this.props.pageSize)
+        .then (data => {
+                this.props.toggleIsFetching(false)
+                this.props.getUsers(data.items);
+                this.props.setTotalUsers(data.totalCount)
             })
     }
     setCurrentPage = (p) => {
         this.props.setPage(p);
-        this.props.toggleIsFetching(true)
-        axios
-        .get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`,
-        {
-            withCredentials: true
-        })
-        .then (response => {
+        this.props.toggleIsFetching(true);
+        getRequestAPI(p, this.props.pageSize).then (data => {
                 this.props.toggleIsFetching(false)
-                this.props.getUsers(response.data.items)
+                this.props.getUsers(data.items)
             })
     }
     render() {
-        return (
-        <>
-        <Users
-        totalUsersCount={this.props.totalUsersCount}
-        pageSize={this.props.pageSize}
-        header={this.props.header}
-        users={this.props.users}
-        avatar={this.props.avatar}
-        unFollow={this.props.unFollow}
-        follow={this.props.follow}
-        setCurrentPage={this.setCurrentPage}
-        currentPage={this.props.currentPage}
-        isFetching={this.props.isFetching}
-        toggleIsFetching={this.props.toggleIsFetching}
-         />
-         </>)
+            return (
+                <Users {...this.props} setCurrentPage={this.setCurrentPage} followRequest={this.props.followRequest}/>
+            )
         }
 }
 let mapStateToProps = (state) => {
@@ -62,10 +40,10 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
     }
 }
 const UsersContainer = connect(mapStateToProps,
-    {follow, unFollow, getUsers, setPage, setTotalUsers, toggleIsFetching})
+    {follow, unFollow, getUsers, setPage, setTotalUsers, toggleIsFetching, followRequest})
     (UsersAPIContainer)
 export default UsersContainer;

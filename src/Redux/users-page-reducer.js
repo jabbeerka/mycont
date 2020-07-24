@@ -14,29 +14,29 @@ let initialState = {
     pageSize : 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: false
 }
 
 const usersPageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FOLLOW: 
+        case FOLLOW:
             return {
                 ...state,
-                users: state.users.map( (user) => {
-                    if (user.id === action.userId) {
-                        return {...user, followed: true}
+                users: state.users.map( (u) => {
+                    if (u.id === action.userId) {
+                        return {...u, follow: true}
                     }
-                    return user
+                    return u
                 })
             }
         case UNFOLLOW: 
             return {
                 ...state,
-                users: state.users.map( (user) => {
-                    if (user.id === action.userId) {
-                        return {...user, followed: false}
+                users: state.users.map( (u) => {
+                    if (u.id === action.userId) {
+                        return {...u, follow: false}
                     }
-                    return user
+                    return u
                 })
             }
         case GET_USERS: 
