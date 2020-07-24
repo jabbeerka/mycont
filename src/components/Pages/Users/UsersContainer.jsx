@@ -1,34 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import {follow, unFollow, getUsers, setPage, setTotalUsers, toggleIsFetching} from '../../../Redux/users-page-reducer';
+import {getUsers,toggleIsFetching,toggleIsFollowed, getUsersThunk, currentPage, follow, unfollow} from '../../../Redux/users-page-reducer';
 import header from '../../../images/users-header.png';
 import userAvatar from '../../../images/users-avatar.png';
 import Users from './Users';
-import { getRequestAPI, followRequest } from '../../../API/API';
 
 
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        getRequestAPI(this.props.currentPage, this.props.pageSize)
-        .then (data => {
-                this.props.toggleIsFetching(false)
-                this.props.getUsers(data.items);
-                this.props.setTotalUsers(data.totalCount)
-            })
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
     }
-    setCurrentPage = (p) => {
-        this.props.setPage(p);
-        this.props.toggleIsFetching(true);
-        getRequestAPI(p, this.props.pageSize).then (data => {
-                this.props.toggleIsFetching(false)
-                this.props.getUsers(data.items)
-            })
+    setCurrentPage = (page) => {
+        this.props.currentPage(page, this.props.pageSize);
     }
     render() {
             return (
-                <Users {...this.props} setCurrentPage={this.setCurrentPage} followRequest={this.props.followRequest}/>
+                <Users {...this.props} setCurrentPage={this.setCurrentPage} toggleIsFollowed={this.props.toggleIsFollowed}/>
             )
         }
 }
@@ -41,9 +29,10 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        isFollowingProgress: state.usersPage.isFollowingProgress
     }
 }
 const UsersContainer = connect(mapStateToProps,
-    {follow, unFollow, getUsers, setPage, setTotalUsers, toggleIsFetching, followRequest})
+    {getUsers,toggleIsFetching, toggleIsFollowed, getUsersThunk, currentPage, follow, unfollow})
     (UsersAPIContainer)
 export default UsersContainer;

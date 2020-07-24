@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './Users.module.sass'
 import Perloader from './UsersBlock/Perloader';
 import { NavLink } from 'react-router-dom';
-import { followRequest, unfollowRequest } from '../../../API/API'
 
 
 const Users = (props) => {
@@ -27,24 +26,19 @@ const Users = (props) => {
                         <NavLink to={/profile/ + u.id}>
                         <img src={ u.photos.small != null ? u.photos.small : props.avatar } alt="avatar" className={styles.avatar}/>
                         </NavLink>
-                        {u.follow ? <button onClick={()=>
-                                                unfollowRequest(u.id).then (data => {
-                                                    console.log(data)
-                                                    if (data.resultCode === 0) {
-                                                            props.unFollow(u.id)
-                                                        }
-                                                    })
-                                                }
-                                            className={styles.follow_btn}>Unfollow</button>
-                                    : <button onClick={()=>
-                                                    followRequest(u.id).then (data => {
-                                                    console.log(data)
-                                                    if (data.resultCode === 0) {
-                                                            props.follow(u.id)
-                                                        }
-                                                    })
-                                                }
-                                            className={styles.follow_btn}>Follow</button> 
+                        {u.follow ? 
+                    <button disabled={props.isFollowingProgress.some(id => id === u.id)} 
+                            onClick={()=> {
+                                props.unfollow(u.id)
+                                }
+                            }
+                            className={styles.follow_btn}>Unfollow</button>
+                  : <button disabled={props.isFollowingProgress.some(id => id === u.id)} 
+                            onClick={()=> {
+                                props.follow(u.id)
+                                }
+                            }
+                            className={styles.follow_btn}>Follow</button> 
                         }
                     </div>
                     <div className={styles.right_wrap}>
