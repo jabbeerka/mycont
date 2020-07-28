@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
-import Profile from './Profile';
 import header from '../../../images/profile-header.png';
+import withAuthRedirect from '../../Hoc/withAuthRedirect';
+import Profile from './Profile';
+import { compose } from 'redux';
 
 
 
-let mapStateToProps = () => {
+let mapStateToProps = (state) => {
   return {
     header: header
   }
 }
-const ProfileContainer = connect(mapStateToProps)(Profile)
-
-export default ProfileContainer;
+export default compose(connect(mapStateToProps),withAuthRedirect)(Profile);

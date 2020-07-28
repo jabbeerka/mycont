@@ -50,7 +50,7 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const getProfile = (id) => (dispatch) => {
     let userId = id;
         if (!userId) {
-            userId = 2
+            userId = 9091
         }
         getProfileRequestAPI(userId).then (data => {
                 dispatch(setUserProfile(data));

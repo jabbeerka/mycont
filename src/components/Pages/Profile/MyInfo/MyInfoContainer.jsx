@@ -3,6 +3,7 @@ import MyInfo from './MyInfo';
 import { connect } from 'react-redux';
 import { getProfile } from '../../../../Redux/profile-page-reducer';
 import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 
 class MyInfoContainer extends React.Component {
     componentDidMount() {
@@ -13,7 +14,6 @@ class MyInfoContainer extends React.Component {
             <MyInfo {...this.props} profile={this.props.profile}/>
             )
     }
-    
 }
 let mapStateToProps = (state) => {
     return {
@@ -21,6 +21,4 @@ let mapStateToProps = (state) => {
     }
     
 }
-let MyInfoContainerUrl = withRouter(MyInfoContainer)
-
-export default connect(mapStateToProps, {getProfile})(MyInfoContainerUrl);
+export default compose(connect(mapStateToProps, {getProfile}),withRouter)(MyInfoContainer);

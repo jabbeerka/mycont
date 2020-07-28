@@ -1,4 +1,4 @@
-import { getRequestAPI, unfollowRequest, followRequest } from '../API/API';
+import { usersAPI, unfollowRequest, followRequest } from '../API/API';
 
 const FOLLOW = "FOLLOW",
       UNFOLLOW = "UNFOLLOW",
@@ -91,7 +91,7 @@ export const toggleIsFollowed = (isFollowingProgress, userId) => ({type: FOLLOW_
 
 export const getUsersThunk = (currentPage, pageSize) => (dispatch) => {
         dispatch(toggleIsFetching(true));
-        getRequestAPI(currentPage, pageSize)
+        usersAPI(currentPage, pageSize)
         .then (data => {
                 dispatch(toggleIsFetching(false));
                 dispatch(getUsers(data.items));
@@ -101,7 +101,7 @@ export const getUsersThunk = (currentPage, pageSize) => (dispatch) => {
 export const currentPage = (page, pageSize) => (dispatch) => {
         dispatch(setPage(page));
         dispatch(toggleIsFetching(true));
-        getRequestAPI(page, pageSize).then (data => {
+        usersAPI(page, pageSize).then (data => {
                 dispatch(toggleIsFetching(false));
                 dispatch(getUsers(data.items));
             })

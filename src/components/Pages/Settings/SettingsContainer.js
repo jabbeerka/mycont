@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import header from '../../../images/settings-header.png';
+import withAuthRedirect from '../../Hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 let mapStateToProps = (state) => {
@@ -8,5 +10,4 @@ let mapStateToProps = (state) => {
         header: header
     }
 }
-const SettingsContainer = connect(mapStateToProps)(Settings)
-export default SettingsContainer;
+export default compose(connect(mapStateToProps),withAuthRedirect)(Settings);

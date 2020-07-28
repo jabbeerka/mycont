@@ -9,6 +9,7 @@ import Settings from '../Pages/Settings/';
 import Dialogs from '../Pages/Dialogs/';
 import Users from '../Pages/Users/';
 import Header from '../Header/';
+import Login from '../Pages/Login';
 
 let App = () =>  {
   return (
@@ -19,9 +20,10 @@ let App = () =>  {
       <Route path="/profile/:userId?" render= {() => <Profile /> } />
       <Route path="/dialogs" render={() => <Dialogs />} />
       <Route path="/news" render={() => <News />} />
-      <Route path="/musics" render={() => <Musics/>}/>
+      <Route path="/musics" render={() => <Musics />}/>
       <Route path="/settings" render={() => <Settings />} />
-      <Route path="/users" render={() => <Users/> } />
+      <Route path="/users" render={() => <Users /> } />
+      <Route path="/login" render={() => <Login /> } />
     </div>
     </BrowserRouter>
   )

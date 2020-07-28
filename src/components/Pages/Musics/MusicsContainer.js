@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import Musics from './Musics';
-import header from '../../../images/musics-header.png'
+import header from '../../../images/musics-header.png';
+import withAuthRedirect from '../../Hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 let mapStateToProps = () => {
@@ -8,5 +10,4 @@ let mapStateToProps = () => {
         header: header
     }
 }
-const MusicsContainer = connect(mapStateToProps)(Musics)
-export default MusicsContainer;
+export default compose(connect(mapStateToProps),withAuthRedirect)(Musics);

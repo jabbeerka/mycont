@@ -5,6 +5,8 @@ import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
 import {changeMessageInputActionCreator, addMessageActionCreator} from '../../../Redux/dialogs-page-reducer';
 import header from '../../../images/dialogs-header.png';
+import withAuthRedirect from '../../Hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 let mapStateToProps = (state) => {
     let inputValue = state.messagesPage.inputMessageArea
@@ -27,6 +29,4 @@ let mapDispatchToProps = (dispatch) => {
         },
     }
 }
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-
-export default DialogsContainer;
+export default compose(connect(mapStateToProps, mapDispatchToProps),withAuthRedirect)(Dialogs);

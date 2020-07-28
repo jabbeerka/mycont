@@ -4,7 +4,8 @@ import {getUsers,toggleIsFetching,toggleIsFollowed, getUsersThunk, currentPage, 
 import header from '../../../images/users-header.png';
 import userAvatar from '../../../images/users-avatar.png';
 import Users from './Users';
-
+import withAuthRedirect from '../../Hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 class UsersAPIContainer extends React.Component {
@@ -31,8 +32,12 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching,
         isFollowingProgress: state.usersPage.isFollowingProgress
     }
-}
-const UsersContainer = connect(mapStateToProps,
-    {getUsers,toggleIsFetching, toggleIsFollowed, getUsersThunk, currentPage, follow, unfollow})
-    (UsersAPIContainer)
-export default UsersContainer;
+} 
+export default compose(
+    connect(mapStateToProps,
+        {getUsers,toggleIsFetching, toggleIsFollowed, getUsersThunk, currentPage, follow, unfollow}),
+    withAuthRedirect
+)(UsersAPIContainer);
+// const UsersContainer = connect(mapStateToProps,
+//     {getUsers,toggleIsFetching, toggleIsFollowed, getUsersThunk, currentPage, follow, unfollow})
+//     (withAuthRedirect(UsersAPIContainer));

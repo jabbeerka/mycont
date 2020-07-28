@@ -6,8 +6,9 @@ let request =  axios.create ({
     headers: {"API-KEY": "91d62374-c2f1-4539-a2e2-f40791faea06"}
 
 })
-export const getRequestAPI = (currentPage , pageSize) => {
+export const usersAPI = (currentPage , pageSize) => {
     return request.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {return response.data})
+    
 }
 export const followRequest = (userId) => {
     return request.post(`follow/${userId}`).then(response => {
