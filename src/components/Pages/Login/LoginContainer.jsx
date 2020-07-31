@@ -1,8 +1,16 @@
 import React from 'react';
-import Login from './Login'
+import ReduxLoginForm from './Login';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { userLogin } from '../../../Redux/auth-reducer';
 
-const LoginContainer = () => {
-    return <Login/>
+
+const LoginContainer = (props) => {
+    return <ReduxLoginForm onSubmit={props.userLogin}/>
 }
-
-export default LoginContainer;
+let mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+export default compose(connect(mapStateToProps,{userLogin}))(LoginContainer);

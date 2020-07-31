@@ -1,5 +1,4 @@
-const ADD_MESSAGE = "ADD_MESSAGE",
-      CHANGE_MESSAGE_INPUT = "CHANGE_MESSAGE_INPUT";
+const ADD_MESSAGE = "ADD_MESSAGE";
 
 let initialState = {
     namesArr: [
@@ -15,8 +14,7 @@ let initialState = {
         {id: 3, message: "What are you doing?"}, 
         {id: 4, message: "Whats Happened", }, 
         {id: 5, message: "Where is my daughter?"}
-    ],
-    inputMessageArea: ""
+    ]
 }
 
 const dialogsPageReducer = (state = initialState, action) => {
@@ -24,22 +22,15 @@ const dialogsPageReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             let newMessage = {
                 id: 7,
-                message: state.inputMessageArea
+                message: action.message
             }
             return {
                 ...state,
-                inputMessageArea: "",
                 messagesArr: [...state.messagesArr, newMessage]
-            }
-        case CHANGE_MESSAGE_INPUT:
-            return {
-                ...state,
-                inputMessageArea: action.text
             }
         default :
             return state;
     }
 }
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-export const changeMessageInputActionCreator = (text) => ({type: CHANGE_MESSAGE_INPUT, text: text});
+export const addMessage = (message) => ({type: ADD_MESSAGE, message});
 export default dialogsPageReducer;

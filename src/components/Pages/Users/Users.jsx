@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Users.module.sass'
-import Perloader from './UsersBlock/Perloader';
+import Preloader from '../../../elements/Preloader'
 import { NavLink } from 'react-router-dom';
 
 
@@ -55,7 +55,7 @@ const Users = (props) => {
             )
         }
         <div>
-            {props.isFetching? <Perloader/> : null}
+            {props.isFetching? <Preloader/> : null}
         </div>
         <div className={styles.current_page}>
             {pages.map((p)=>{return(<span 

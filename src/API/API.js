@@ -6,23 +6,47 @@ let request =  axios.create ({
     headers: {"API-KEY": "91d62374-c2f1-4539-a2e2-f40791faea06"}
 
 })
-export const usersAPI = (currentPage , pageSize) => {
-    return request.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {return response.data})
-    
-}
-export const followRequest = (userId) => {
-    return request.post(`follow/${userId}`).then(response => {
+export const profileAPI = {
+    usersAPI (currentPage , pageSize) {
+        return request.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => {
             return response.data
-        })
-}
-export const unfollowRequest = (userId) => {
-    return request.delete(`follow/${userId}`).then(response => {
-            return response.data
-        })
+            })
+        },
+        getProfile  (userId) {
+            return request.get(`profile/${userId}`)
+            .then(response => {
+                return response.data
+            })
+        },
+        unfollowRequest (userId) {
+            return request.delete(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
+        },
+        followRequest (userId) {
+            return request.post(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
+        },
+        getStatus (userId) {
+            return request.get(`profile/status/${userId}`)
+        },
+        updateStatus (status) {
+            return request.put(`profile/status`, {status: status})
+        },
+        userLogin (email, password, rememberMe = false) {
+            return request.post(`/auth/login`, {email, password, rememberMe})
+        },
+        userLogout () {
+            return request.delete(`/auth/login`)
+        }
 }
 export const authRequestAPI = () => {
-    return request.get(`auth/me`).then(response => {return response.data})
-}
-export const getProfileRequestAPI = (userId) => {
-    return request.get(`profile/${userId}`).then(response => {return response.data})
-}
+    return request.get(`auth/me`)
+    .then(response => {
+        return response.data
+        })
+    }

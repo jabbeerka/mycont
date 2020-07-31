@@ -6,6 +6,7 @@ import headersReducer from './headers-reducer';
 import usersPageReducer from './users-page-reducer';
 import authReducer from './auth-reducer';
 import middleWarethunk from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
 
 let reducers = combineReducers({
     headers : headersReducer,
@@ -13,7 +14,8 @@ let reducers = combineReducers({
     messagesPage: dialogsPageReducer,
     navPage: navbarReducer,
     usersPage: usersPageReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 });
 
 const store = createStore(reducers, applyMiddleware(middleWarethunk));

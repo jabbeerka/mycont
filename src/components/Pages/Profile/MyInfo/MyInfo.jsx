@@ -1,19 +1,19 @@
 import React from 'react';
 import styles from './MyInfo.module.sass';
-import Perloader from '../../Users/UsersBlock/Perloader';
+import Preloader from '../../../../elements/Preloader';
 import avatar from '../../../../images/users-avatar.png';
 import ProfileStatus from '../ProfileStatus';
 
-const MyInfo = ({profile, status}) => {
+const MyInfo = ({profile, status, updateStatus}) => {
   if (!profile) {
-      return <Perloader/>
+      return <Preloader/>
   }
   return (
     <section className={styles.prof}> 
       <img src={profile.photos.large || avatar} alt="avatar" className={styles.prof__avatar}/>
       <div className={styles.prof__wrap}>
         <span className={styles.prof__name}> {profile.fullName} </span> <br/>
-        <ProfileStatus status={"Hello my friend!"}/>
+        <ProfileStatus status={status} updateStatus={updateStatus}/>
         <div className={styles.prof__info}> 
           <span>About me:</span> {profile.aboutMe}<br/> 
           <span>vk:</span> {profile.contacts.vk} <br/>

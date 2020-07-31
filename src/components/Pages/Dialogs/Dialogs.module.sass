@@ -16,10 +16,16 @@
         display: flex
         flex-direction: column
         padding: 40px
-        textarea
-            padding: 10px
-            width: 50%
-            border: 0.5px solid #f0f0f0
+    &__textarea
+        display: block
+        padding: 10px
+        width: 50%
+        border: 0.5px solid #f0f0f0
+        &_error
+            border: solid 2px red
+        &:active, &:hover, &:focus 
+            outline: 0
+            outline-offset: 0
     &__button
         background-color: #04D4FB
         margin-top: 10px

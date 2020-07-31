@@ -1,2 +1,2 @@
-import Dialogs from './DialogsContainer';
-export default Dialogs;
+import DialogsReduxForm from './DialogsContainer';
+export default DialogsReduxForm;
