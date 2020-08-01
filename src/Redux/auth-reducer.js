@@ -1,7 +1,7 @@
 import { authRequestAPI, profileAPI } from '../API/API'
+import { stopSubmit } from 'redux-form';
 
-const SET_USER_DATA = "SET_USER_DATA",
-      SIGN_IN_PROFILE = "SIGN_IN_PROFILE"
+const SET_USER_DATA = "SET_USER_DATA";
 
 
 let initialState = {
@@ -16,23 +16,15 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
-            }
-        case SIGN_IN_PROFILE:
-            return {
-                ...state,
-                ...action.formData,
-                isAuth:true
+                ...action.data
             }
         default:
             return state;
     }
 }
-export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth} })
-export const signInProfile = (email, password, rememberMe) => ({type: SIGN_IN_PROFILE, formData: {email, password, rememberMe}})
+export const setAuthUserData = (userId, email, login, isAuth ) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth} })
 
-export const logined = () => (dispatch) => {
+export const getAuthUserData = () => (dispatch) => {
     authRequestAPI().then (data => {
         if (data.resultCode === 0) {
             let {id, email, login} = data.data
@@ -40,18 +32,20 @@ export const logined = () => (dispatch) => {
         }
     })
 }
-export const userLogin = (formData) => (dispatch) => {
-    let {email, password, rememberMe} = formData
+export const userLogin = ({email, password, rememberMe}) => (dispatch) => {
     profileAPI.userLogin(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(setAuthUserData())
+            dispatch(getAuthUserData())
+        } else {
+            let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+            dispatch(stopSubmit("login", {_error: errorMessage}));
         }
     })
 }
 export const userLogout = () => (dispatch) => {
     profileAPI.userLogout().then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(logined(null, null, null, false))
+            dispatch(setAuthUserData(null, null, null, false))
         }
     })
 }
