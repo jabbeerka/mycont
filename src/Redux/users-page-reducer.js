@@ -83,46 +83,40 @@ const usersPageReducer = (state = initialState, action) => {
 }
 export const followSucces = (userId) => ({type: FOLLOW, userId});
 export const unFollowSucces = (userId) => ({type: UNFOLLOW, userId});
-export const getUsers = (users) => ({type: GET_USERS, users});
+export const setUsers = (users) => ({type: GET_USERS, users});
 export const setPage = (currentPage) => ({type: SET_PAGE, currentPage});
 export const setTotalUsers = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleIsFollowed = (isFollowingProgress, userId) => ({type: FOLLOW_IS_FETCHING, isFollowingProgress, userId})
 
-export const getUsersThunk = (currentPage, pageSize) => (dispatch) => {
+export const requestUsers = (page, pageSize) => (dispatch) => {
         dispatch(toggleIsFetching(true));
-        profileAPI.usersAPI(currentPage, pageSize)
+        dispatch(setPage(page));
+        profileAPI.usersAPI(page, pageSize)
         .then (data => {
                 dispatch(toggleIsFetching(false));
-                dispatch(getUsers(data.items));
+                dispatch(setUsers(data.items));
                 dispatch(setTotalUsers(data.totalCount));
             })
 }
-export const currentPage = (page, pageSize) => (dispatch) => {
-        dispatch(setPage(page));
-        dispatch(toggleIsFetching(true));
-        profileAPI.usersAPI(page, pageSize).then (data => {
-                dispatch(toggleIsFetching(false));
-                dispatch(getUsers(data.items));
-            })
-}
+
 export const follow = (userId) => (dispatch) => {
     dispatch(toggleIsFollowed(true, userId));
     profileAPI.followRequest(userId).then (data => {
-        dispatch(toggleIsFollowed(false, userId));
         if (data.resultCode === 0) {
                 dispatch(followSucces(userId));
             }
+            dispatch(toggleIsFollowed(false, userId));
         })
 }
 
 export const unfollow = (userId) => (dispatch) => {
     dispatch(toggleIsFollowed(true, userId));
     profileAPI.unfollowRequest(userId).then (data => {
-        dispatch(toggleIsFollowed(false, userId));
         if (data.resultCode === 0) {
                 dispatch(unFollowSucces(userId));
             }
+            dispatch(toggleIsFollowed(false, userId));
         })
 }
 

@@ -1,19 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import {getUsers,toggleIsFetching,toggleIsFollowed, getUsersThunk, currentPage, follow, unfollow} from '../../../Redux/users-page-reducer';
+import {requestUsers,toggleIsFetching,toggleIsFollowed, follow, unfollow} from '../../../Redux/users-page-reducer';
 import header from '../../../images/users-header.png';
 import userAvatar from '../../../images/users-avatar.png';
 import Users from './Users';
 import withAuthRedirect from '../../Hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getToggleIsFetching, getIsFollowingProgress } from '../../../Redux/selectors/users-selector';
 
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     }
     setCurrentPage = (page) => {
-        this.props.currentPage(page, this.props.pageSize);
+        this.props.requestUsers(page, this.props.pageSize);
     }
     render() {
             return (
@@ -25,17 +26,17 @@ let mapStateToProps = (state) => {
     return {
         header: header,
         avatar: userAvatar,
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isFollowingProgress: state.usersPage.isFollowingProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getToggleIsFetching(state),
+        isFollowingProgress: getIsFollowingProgress(state)
     }
 } 
 export default compose(
     connect(mapStateToProps,
-        {getUsers,toggleIsFetching, toggleIsFollowed, getUsersThunk, currentPage, follow, unfollow}),
+        {requestUsers,toggleIsFetching, toggleIsFollowed, follow, unfollow}),
     withAuthRedirect
 )(UsersAPIContainer);
 // const UsersContainer = connect(mapStateToProps,

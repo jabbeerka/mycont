@@ -1,2 +1,2 @@
-import ProfileStatus from './MyStatus';
-export default ProfileStatus;
+import ProfileStatusWithHooks from './MyStatus';
+export default ProfileStatusWithHooks;
