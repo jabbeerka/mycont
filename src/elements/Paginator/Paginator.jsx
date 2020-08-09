@@ -27,7 +27,7 @@ const Paginator = ({ totalItemsCount, pageSize, currentPage, setCurrentPage, por
                 return <span 
                 onClick={(e) => setCurrentPage(page)} 
                 key={page} 
-                className= { cn({[ styles.paginator_active]: currentPage === page}, styles.paginator_b)}>
+                className= { cn({[ styles.paginator_b]: currentPage === page}, styles.paginator_active)}>
                         {page}
                         </span>
             })

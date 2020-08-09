@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import styles from './App.module.scss';
 import Navigator from '../Nav';
-import Profile from '../Pages/Profile/';
-import { BrowserRouter, Route } from 'react-router-dom';
-import News from '../Pages/News/';
-import Musics from '../Pages/Musics/';
-import Settings from '../Pages/Settings/';
-import Dialogs from '../Pages/Dialogs/';
-import Users from '../Pages/Users/';
+import { HashRouter, BrowserRouter, Route } from 'react-router-dom';
 import Header from '../Header/';
-import Login from '../Pages/Login';
 import { initialized } from '../../Redux/app-reducer';
 import { connect } from 'react-redux';
 import Preloader from '../../elements/Preloader';
 import { Provider } from 'react-redux';
 import store from '../../Redux/redux-store';
+const Dialogs = lazy(() => import('../Pages/Dialogs/'));
+const Profile = lazy(() => import('../Pages/Profile/'));
+const Login = lazy(() => import('../Pages/Login/'));
+const Settings = lazy(() => import('../Pages/Settings/'));
+const Musics = lazy(() => import('../Pages/Musics/'));
+const Users = lazy(() => import('../Pages/Users/'));
+const News = lazy(() => import('../Pages/News/'));
 
 class App extends React.Component {
   componentDidMount() {
@@ -26,18 +26,21 @@ class App extends React.Component {
     }
     return (
       <BrowserRouter>
-        <div className={styles.body}>
-          <Header />
-          <Navigator />
-          <Route path="/profile/:userId?" render={() => <Profile />} />
-          <Route path="/dialogs" render={() => <Dialogs />} />
-          <Route path="/news" render={() => <News />} />
-          <Route path="/musics" render={() => <Musics />} />
-          <Route path="/settings" render={() => <Settings />} />
-          <Route path="/users" render={() => <Users />} />
-          <Route path="/login" render={() => <Login />} />
-        </div>
+        <Suspense fallback={<Preloader />}>
+          <div className={styles.body}>
+              <Header />
+              <Navigator />
+              <Route path="/profile/:userId?" render={() => <Profile />} />
+              <Route path="/dialogs" render={() => <Dialogs />} />
+              <Route path="/news" render={() => <News />} />
+              <Route path="/musics" render={() => <Musics />} />
+              <Route path="/settings" render={() => <Settings />} />
+              <Route path="/users" render={() => <Users />} />
+              <Route path="/login" render={() => <Login />} />
+          </div>
+        </Suspense>
       </BrowserRouter>
+
     )
   }
 
@@ -50,11 +53,11 @@ const AppContainer = connect(mapStateToProps, { initialized })(App);
 
 const MyContentAPP = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store} >
         <AppContainer />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 export default MyContentAPP;
