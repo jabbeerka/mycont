@@ -4,7 +4,6 @@ import Names from './Names';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
 import { addMessage } from '../../../Redux/dialogs-page-reducer';
-import header from '../../../images/dialogs-header.png';
 import withAuthRedirect from '../../Hoc/withAuthRedirect';
 import { compose } from 'redux';
 
@@ -15,8 +14,7 @@ let mapStateToProps = (state) => {
     return {
         names: namesObj,
         messages:messagesObj, 
-        inputValue: inputValue,
-        header: header
+        inputValue: inputValue
     }
 }
 let mapDispatchToProps = (dispatch) => {

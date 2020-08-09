@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import profilePageReducer from './profile-page-reducer';
 import dialogsPageReducer from './dialogs-page-reducer';
 import navbarReducer from './navbar-reducer';
@@ -20,7 +21,10 @@ let reducers = combineReducers({
     app: appReducer
 });
 
-const store = createStore(reducers, applyMiddleware(middleWarethunk));
+const store = createStore(reducers, composeWithDevTools(
+    applyMiddleware(middleWarethunk)
+  ));
+
 
 window.store = store;
 

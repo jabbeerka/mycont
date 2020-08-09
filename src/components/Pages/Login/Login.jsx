@@ -1,27 +1,29 @@
 import React from 'react';
 import styles from './Login.module.sass';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { Element } from '../../../elements/Forms';
 import { required, maxLengthCreator } from '../../../utils/validator';
+import fieldCreator from '../../../utils/fieldCreator';
 
 const maxLength15 = maxLengthCreator(30);
 const Input = Element("input")
 
-const Login = (props) => {
-    return (<div className={styles.form__wrapper}>
+const Login = ({ handleSubmit, error }) => {
+    return (
+        <div className={styles.form__wrapper}>
             <h1 className={styles.form__title}>Login</h1>
-            <form onSubmit={props.handleSubmit} className={styles.form}>
-                    <Field className={styles.form__input} placeholder="login" name="email" component={Input} validate={[required, maxLength15]}/>
-                    <Field className={styles.form__input} placeholder="password" name="password" component={Input} validate={[required, maxLength15]} type="password"/>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                {fieldCreator(styles.form__input, "login", "email", Input, [required, maxLength15])}
+                {fieldCreator(styles.form__input, "password", "password", Input, [required, maxLength15], "password")}
                 <div className={styles.form__input_checkbox}>
-                    <Field name="rememberMe" component={Input} type="checkbox"/> <span>Remember me</span>
+                    {fieldCreator(null, null, "rememberMe", Input, null, "checkbox")}<span>Remember me</span>
                 </div>
-                {props.error && <div>{props.error}</div> }
+                {error && <div>{error}</div>}
                 <button className={styles.form__button}>Sign in</button>
             </form>
-            </div>
-        )
+        </div>
+    )
 }
-const ReduxLoginForm = reduxForm({form: "login"})(Login)
+const ReduxLoginForm = reduxForm({ form: "login" })(Login)
 
 export default ReduxLoginForm;

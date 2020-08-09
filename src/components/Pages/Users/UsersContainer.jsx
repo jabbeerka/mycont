@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import {requestUsers,toggleIsFetching,toggleIsFollowed, follow, unfollow} from '../../../Redux/users-page-reducer';
-import header from '../../../images/users-header.png';
+import { requestUsers, toggleIsFetching, toggleIsFollowed, follow, unfollow } from '../../../Redux/users-page-reducer';
 import userAvatar from '../../../images/users-avatar.png';
 import Users from './Users';
 import withAuthRedirect from '../../Hoc/withAuthRedirect';
@@ -11,20 +10,23 @@ import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getToggleIsF
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+        const { currentPage, pageSize } = this.props;
+        this.props.requestUsers(currentPage, pageSize);
     }
     setCurrentPage = (page) => {
         this.props.requestUsers(page, this.props.pageSize);
     }
     render() {
-            return (
-                <Users {...this.props} setCurrentPage={this.setCurrentPage} toggleIsFollowed={this.props.toggleIsFollowed}/>
-            )
-        }
+        const { toggleIsFollowed} = this.props
+        return (
+            <Users {...this.props} 
+            setCurrentPage={this.setCurrentPage} 
+            toggleIsFollowed={toggleIsFollowed} />
+        )
+    }
 }
 let mapStateToProps = (state) => {
     return {
-        header: header,
         avatar: userAvatar,
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -33,10 +35,10 @@ let mapStateToProps = (state) => {
         isFetching: getToggleIsFetching(state),
         isFollowingProgress: getIsFollowingProgress(state)
     }
-} 
+}
 export default compose(
     connect(mapStateToProps,
-        {requestUsers,toggleIsFetching, toggleIsFollowed, follow, unfollow}),
+        { requestUsers, toggleIsFetching, toggleIsFollowed, follow, unfollow }),
     withAuthRedirect
 )(UsersAPIContainer);
 // const UsersContainer = connect(mapStateToProps,

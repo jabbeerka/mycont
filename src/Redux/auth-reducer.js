@@ -22,32 +22,29 @@ const authReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const setAuthUserData = (userId, email, login, isAuth ) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth} })
+export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } })
 
-export const getAuthUserData = () => (dispatch) => {
-    return authRequestAPI().then (data => {
-        if (data.resultCode === 0) {
-            let {id, email, login} = data.data
-            dispatch(setAuthUserData(id, email, login, true));
-        }
-    });
+export const getAuthUserData = () => async (dispatch) => {
+    const data = await authRequestAPI();
+    if (data.resultCode === 0) {
+        let { id, email, login } = data.data
+        dispatch(setAuthUserData(id, email, login, true));
+    }
 }
-export const userLogin = ({email, password, rememberMe}) => (dispatch) => {
-    profileAPI.userLogin(email, password, rememberMe).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(getAuthUserData())
-        } else {
-            let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
-            dispatch(stopSubmit("login", {_error: errorMessage}));
-        }
-    })
+export const userLogin = ({ email, password, rememberMe }) => async (dispatch) => {
+    const response = await profileAPI.userLogin(email, password, rememberMe);
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+        dispatch(stopSubmit("login", { _error: errorMessage }));
+    }
 }
-export const userLogout = () => (dispatch) => {
-    profileAPI.userLogout().then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setAuthUserData(null, null, null, false))
-        }
-    })
+export const userLogout = () => async (dispatch) => {
+    const response = await profileAPI.userLogout();
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
 }
 
 export default authReducer;

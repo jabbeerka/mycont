@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import MyInfo from './MyInfo';
 import { connect } from 'react-redux';
 import { getProfile, getStatus, updateStatus } from '../../../../Redux/profile-page-reducer';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 
-class MyInfoContainer extends React.Component {
+class MyInfoContainer extends PureComponent {
     componentDidMount() {
+        const {getProfile, getStatus, autorizhedId} = this.props
         let id = this.props.match.params.userId;
-        if (!id) id = this.props.autorizhedId;
+        if (!id) id = autorizhedId;
         if (!id) this.props.history.push('/login');
-        this.props.getProfile(id);
-        this.props.getStatus(id);
+        getProfile(id);
+        getStatus(id);
     }
     render() {
+        const {profile, status, updateStatus} = this.props
         return (
-            <MyInfo {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
-            )
+            <MyInfo {...this.props} profile={profile} status={status} updateStatus={updateStatus} />
+        )
     }
 }
 let mapStateToProps = (state) => {
@@ -26,6 +28,6 @@ let mapStateToProps = (state) => {
         isAuth: state.auth.isAuth,
         autorizhedId: state.auth.userId
     }
-    
+
 }
-export default compose(connect(mapStateToProps, {getProfile, getStatus, updateStatus}),withRouter)(MyInfoContainer);
+export default compose(connect(mapStateToProps, { getProfile, getStatus, updateStatus }), withRouter)(MyInfoContainer);

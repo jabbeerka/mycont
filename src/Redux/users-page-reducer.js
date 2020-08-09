@@ -11,10 +11,7 @@ const FOLLOW = "FOLLOW",
 
 let initialState = {
     users : [],
-    imgs : [
-        {avatar : "https://b.radikal.ru/b04/2006/ef/91815c2a1b59.png"}
-    ],
-    pageSize : 5,
+    pageSize : 20,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
@@ -28,7 +25,7 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map( (u) => {
                     if (u.id === action.userId) {
-                        return {...u, follow: true}
+                        return {...u, followed: true}
                     }
                     return u
                 })
@@ -38,7 +35,7 @@ const usersPageReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map( (u) => {
                     if (u.id === action.userId) {
-                        return {...u, follow: false}
+                        return {...u, followed: false}
                     }
                     return u
                 })
@@ -60,17 +57,10 @@ const usersPageReducer = (state = initialState, action) => {
                 currentPage : action.currentPage
             }
         case SET_TOTAL_USERS_COUNT:
-            if (action.totalUsersCount > 100 ){
-                action.totalUsersCount = 100;
-                return {
-                    ...state, totalUsersCount: action.totalUsersCount
-                }
-            } else {
                 return {
                     ...state,
                     totalUsersCount : action.totalUsersCount
                 }
-            }
         case TOGGLE_IS_FETCHING: 
             return {
                 ...state,
@@ -82,7 +72,7 @@ const usersPageReducer = (state = initialState, action) => {
     }
 }
 export const followSucces = (userId) => ({type: FOLLOW, userId});
-export const unFollowSucces = (userId) => ({type: UNFOLLOW, userId});
+export const unfollowSucces = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: GET_USERS, users});
 export const setPage = (currentPage) => ({type: SET_PAGE, currentPage});
 export const setTotalUsers = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
@@ -100,24 +90,21 @@ export const requestUsers = (page, pageSize) => (dispatch) => {
             })
 }
 
-export const follow = (userId) => (dispatch) => {
+const followUnfollowAC = async (dispatch, userId, requestApi, dispatchResulte) => {
     dispatch(toggleIsFollowed(true, userId));
-    profileAPI.followRequest(userId).then (data => {
+    let data = await requestApi(userId);
         if (data.resultCode === 0) {
-                dispatch(followSucces(userId));
+                dispatch(dispatchResulte(userId));
             }
             dispatch(toggleIsFollowed(false, userId));
-        })
+}
+
+export const follow = (userId) => async (dispatch) => {
+    followUnfollowAC(dispatch, userId, profileAPI.followRequest.bind(profileAPI), followSucces);
 }
 
 export const unfollow = (userId) => (dispatch) => {
-    dispatch(toggleIsFollowed(true, userId));
-    profileAPI.unfollowRequest(userId).then (data => {
-        if (data.resultCode === 0) {
-                dispatch(unFollowSucces(userId));
-            }
-            dispatch(toggleIsFollowed(false, userId));
-        })
+    followUnfollowAC(dispatch, userId, profileAPI.unfollowRequest.bind(profileAPI), unfollowSucces);
 }
 
 export default usersPageReducer;

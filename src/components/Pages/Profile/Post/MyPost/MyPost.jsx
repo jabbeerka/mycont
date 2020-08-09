@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './MyPost.module.sass';
 
-const MyPost = (props) => {
+const MyPost = ({ posts }) => {
     return (
-        <section 
-        className={styles.prof__news}>
-            { props.posts }
+        <section
+            className={styles.prof__news}>
+            {posts}
         </section>
     )
 }

@@ -6,15 +6,15 @@ import { userLogin } from '../../../Redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
 
 
-const LoginContainer = (props) => {
-    if (props.isAuth) {
+const LoginContainer = ({ isAuth, userLogin }) => {
+    if (isAuth) {
         return <Redirect to={'/profile'} />
     }
-    return <ReduxLoginForm onSubmit={props.userLogin}/>
+    return <ReduxLoginForm onSubmit={userLogin} />
 }
 let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth
     }
 }
-export default compose(connect(mapStateToProps,{userLogin}))(LoginContainer);
+export default compose(connect(mapStateToProps, { userLogin }))(LoginContainer);
