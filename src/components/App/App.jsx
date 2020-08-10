@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import styles from './App.module.scss';
 import Navigator from '../Nav';
-import { HashRouter, BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import Header from '../Header/';
 import { initialized } from '../../Redux/app-reducer';
 import { connect } from 'react-redux';
@@ -25,7 +25,7 @@ class App extends React.Component {
       return <Preloader />
     }
     return (
-      <BrowserRouter>
+      <HashRouter>
         <Suspense fallback={<Preloader />}>
           <div className={styles.body}>
               <Header />
@@ -39,7 +39,7 @@ class App extends React.Component {
               <Route path="/login" render={() => <Login />} />
           </div>
         </Suspense>
-      </BrowserRouter>
+      </HashRouter>
 
     )
   }
