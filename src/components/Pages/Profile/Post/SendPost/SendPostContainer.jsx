@@ -11,11 +11,11 @@ import fieldCreator from '../../../../../utils/fieldCreator';
 let maxLength30 = maxLengthCreator(30);
 const Input = Element("input");
 
-const NewPostForm = ({ handleSubmit }) => {
+const NewPostForm = ({ handleSubmit, isAuth }) => {
   return (
     <form onSubmit={handleSubmit} name="NewPost">
       {fieldCreator(styles.prof__input, null, "newPostBody", Input, [required, maxLength30])}
-      <button className={styles.prof__post_btn}>Send</button>
+      <button disabled={!isAuth} className={styles.prof__post_btn}>Send</button>
     </form>
   )
 }
@@ -28,7 +28,8 @@ const SendPostContainer = (props) => {
 }
 let mapStateToProps = (state) => {
   return {
-    newTextArea: state.profilePage.inputArea
+    newTextArea: state.profilePage.inputArea,
+    isAuth: state.auth.isAuth
   }
 }
 export default connect(mapStateToProps, { addPost })(SendPostContainer);

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { requestUsers, toggleIsFetching, toggleIsFollowed, follow, unfollow } from '../../../Redux/users-page-reducer';
 import userAvatar from '../../../images/users-avatar.png';
 import Users from './Users';
-import withAuthRedirect from '../../Hoc/withAuthRedirect';
 import { compose } from 'redux';
 import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getToggleIsFetching, getIsFollowingProgress } from '../../../Redux/selectors/users-selector';
 
@@ -36,11 +35,4 @@ let mapStateToProps = (state) => {
         isFollowingProgress: getIsFollowingProgress(state)
     }
 }
-export default compose(
-    connect(mapStateToProps,
-        { requestUsers, toggleIsFetching, toggleIsFollowed, follow, unfollow }),
-    withAuthRedirect
-)(UsersAPIContainer);
-// const UsersContainer = connect(mapStateToProps,
-//     {getUsers,toggleIsFetching, toggleIsFollowed, getUsersThunk, currentPage, follow, unfollow})
-//     (withAuthRedirect(UsersAPIContainer));
+export default compose(connect(mapStateToProps,{ requestUsers, toggleIsFetching, toggleIsFollowed, follow, unfollow }))(UsersAPIContainer);

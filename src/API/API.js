@@ -42,6 +42,15 @@ export const profileAPI = {
         },
         userLogout () {
             return request.delete(`/auth/login`)
+        },
+        sendPhoto (file) {
+            const formData = new FormData();
+            formData.append("Image", file);
+            return request.put(`/profile/photo`, formData, {
+                headers: {
+                    "Content-Type" : "multipart/form-data"
+                }
+            })
         }
 }
 export const authRequestAPI = () => {

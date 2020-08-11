@@ -11,6 +11,31 @@
         width: 200px
         height: 200px
         margin: 15px
+        border-radius: 15px
+        &_change
+            width: 0.1px
+            height: 0.1px
+            opacity: 0
+            overflow: hidden
+            position: absolute
+            z-index: -1
+        &_change + label
+            position: absolute
+            top: 10px
+            left: 35px
+            background-color: #04d4fb
+            font-size: 12px
+            color: white
+            border: 0.1px white solid
+            border-radius: 5px
+        &_change:focus + label,
+        &_change + label:hover
+            background-color: gold
+            cursor: pointer
+        &_wrap
+            position: relative
+            display: grid
+            grid-template-rows: 2fr 1fr
     &__name
         display: block
         font-size: 22px

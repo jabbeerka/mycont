@@ -4,15 +4,24 @@ import Preloader from '../../../../elements/Preloader';
 import avatar from '../../../../images/users-avatar.png';
 import ProfileStatus from '../ProfileStatus';
 
-const MyInfo = ({ profile, status, updateStatus }) => {
+const MyInfo = ({ profile, status, updateStatus, isOwner, setPhoto}) => {
   if (!profile) {
     return <Preloader />
   }
+  const onPhothoChanged = (e) => {
+    if (e.target.files) {
+      setPhoto(e.target.files[0]);
+    }
+  }
   return (
     <section className={styles.prof}>
+      <div className={styles.prof__avatar_wrap} >
       <img src={profile.photos.large || avatar} alt="avatar" className={styles.prof__avatar} />
+      <input type="file" onChange={onPhothoChanged} className={styles.prof__avatar_change} name="file" id="file" />
+      { (!isOwner) ?  <label htmlFor="file">edit photo</label> : ""}
+      </div>
       <div className={styles.prof__wrap}>
-        <span className={styles.prof__name}> {profile.fullName} </span> <br />
+  <span className={styles.prof__name}> {profile.fullName} </span> <br />
         <ProfileStatus status={status} updateStatus={updateStatus} />
         <div className={styles.prof__info}>
           <span>About me:</span> {profile.aboutMe}<br />
