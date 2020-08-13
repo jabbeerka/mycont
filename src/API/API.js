@@ -37,29 +37,31 @@ export const profileAPI = {
     updateStatus(status) {
         return request.put(`profile/status`, { status: status })
     },
-    userLogin(email, password, rememberMe = false) {
-        return request.post(`/auth/login`, { email, password, rememberMe })
+    userLogin(email, password, rememberMe = false, captcha = null) {
+        return request.post(`auth/login`, { email, password, rememberMe, captcha })
     },
     userLogout() {
-        return request.delete(`/auth/login`)
+        return request.delete(`auth/login`)
     },
     sendPhoto(file) {
         const formData = new FormData();
         formData.append("Image", file);
-        return request.put(`/profile/photo`, formData, {
+        return request.put(`profile/photo`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         })
     },
     updateProfile(formData) {
-        // let json = JSON.stringify({formData})
-        return request.put(`/profile`, formData)
+        return request.put(`profile`, formData)
     }
 }
 export const authRequestAPI = () => {
     return request.get(`auth/me`)
-        .then(response => {
-            return response
-        })
+
+}
+export const securityCaptcha = {
+    getCaptcha() {
+        return request.get(`security/get-captcha-url`)
+    }
 }

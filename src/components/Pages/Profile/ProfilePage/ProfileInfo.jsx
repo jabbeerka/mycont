@@ -32,7 +32,6 @@ export const ProfileInfo = ({ profile, isOwner, activateEditMode }) => {
 const Input = Element("input");
 const Texarea = Element("textarea");
 export const ProfileInfoEdit = ({ handleSubmit, editProfileInfo, profile , error}) => {
-    // {fieldCreator(styles.form__input, "password", "password", Input, [required, maxLength15], "password")}
     return (
         <form onSubmit={handleSubmit} >
             <div className={styles.prof__wrap}>
@@ -52,11 +51,11 @@ export const ProfileInfoEdit = ({ handleSubmit, editProfileInfo, profile , error
             </div>
             <div className={styles.prof__info}>
                 <div className={styles.prof__contactsTitle} >-Contacts-</div> <br /> 
-                {Object.keys(profile.contacts).map(key => <div> 
+                {Object.keys(profile.contacts).map(key => <div key={key} > 
                     <span> {key}: {fieldCreator(styles.form__input, key, `contacts.${key}`, Input, [], "input",)} </span></div> )}
             </div>
             <button className={styles.form__button} onClick={editProfileInfo}>Save</button>
-            {error && <div>{error}</div>}
+            {error && <div className={styles.form__error} >{error}</div>}
         </form>
     )
 }
