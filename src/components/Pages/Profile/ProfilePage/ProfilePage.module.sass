@@ -1,0 +1,107 @@
+.avatar
+    width: 200px
+
+.prof
+    display: flex
+    &__wrap
+        margin: 15px
+    &__avatar
+        width: 200px
+        height: 200px
+        margin: 15px
+        border-radius: 15px
+        &_change
+            width: 0.1px
+            height: 0.1px
+            opacity: 0
+            overflow: hidden
+            position: absolute
+            z-index: -1
+        &_change + label
+            position: absolute
+            top: 10px
+            left: 35px
+            background-color: #04d4fb
+            font-size: 12px
+            color: white
+            border: 0.1px white solid
+            border-radius: 5px
+        &_change:focus + label,
+        &_change + label:hover
+            background-color: gold
+            cursor: pointer
+        &_wrap
+            position: relative
+            display: grid
+            grid-template-rows: 2fr 1fr
+    &__name
+        display: block
+        font-size: 22px
+        font-weight: 800
+    &__info
+        display: block
+        margin-top: 15px
+        span
+            display: inline-block
+            color: gray
+            font-style: italic
+            margin-top: 10px
+    &__contactsTitle
+        display: inline-block
+        margin-top: 20px
+        color: #04d4fb
+
+.form
+    display: block
+    border: 1px solid white
+    margin: 0 auto
+    background-color: #F8FEFE
+    div
+        display: block
+        margin-top: 10px
+        color: red
+        font-style: italic
+        font-size: 15px
+        text-align: center
+    &__title
+        font-size: 22px
+        text-align: center
+        font-weight: normal
+        color: #fff
+        border: 1px solid white
+        margin-bottom: 0
+        border-top-right-radius: 10px
+        border-top-left-radius: 10px
+        background-color: #04D4FB
+    &__wrapper
+        width: 250px
+        min-height: 300px
+        margin: 0 auto
+    &__input, &__textarea
+        display: block
+        margin: 25px auto
+        border-radius: 5px
+        height: 25px
+        border: 1px solid white
+        padding: 10px
+        font-size: 15px
+        &:active, &:hover, &:focus 
+            outline: 0
+            outline-offset: 0
+        &_checkbox
+            display: flex
+            justify-content: center
+            span
+                margin-left: 15px
+                color: #858484
+                font-style: italic
+                font-size: 12px
+    &__button
+        display: block
+        background-color: #04D4FB
+        margin: 25px auto
+        width: 100px
+        height: 25px
+        border: none
+        border-radius: 10px
+        color: #fff

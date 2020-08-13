@@ -79,21 +79,19 @@ export const setTotalUsers = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT,
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleIsFollowed = (isFollowingProgress, userId) => ({type: FOLLOW_IS_FETCHING, isFollowingProgress, userId})
 
-export const requestUsers = (page, pageSize) => (dispatch) => {
+export const requestUsers = (page, pageSize) => async (dispatch) => {
         dispatch(toggleIsFetching(true));
         dispatch(setPage(page));
-        profileAPI.usersAPI(page, pageSize)
-        .then (data => {
+        const response = await profileAPI.usersAPI(page, pageSize);
                 dispatch(toggleIsFetching(false));
-                dispatch(setUsers(data.items));
-                dispatch(setTotalUsers(data.totalCount));
-            })
+                dispatch(setUsers(response.data.items));
+                dispatch(setTotalUsers(response.data.totalCount));
 }
 
 const followUnfollowAC = async (dispatch, userId, requestApi, dispatchResulte) => {
     dispatch(toggleIsFollowed(true, userId));
-    let data = await requestApi(userId);
-        if (data.resultCode === 0) {
+    const response = await requestApi(userId);
+        if (response.data.resultCode === 0) {
                 dispatch(dispatchResulte(userId));
             }
             dispatch(toggleIsFollowed(false, userId));

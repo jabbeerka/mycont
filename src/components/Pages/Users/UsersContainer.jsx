@@ -16,11 +16,11 @@ class UsersAPIContainer extends React.Component {
         this.props.requestUsers(page, this.props.pageSize);
     }
     render() {
-        const { toggleIsFollowed} = this.props
+        const { toggleIsFollowed } = this.props
         return (
-            <Users {...this.props} 
-            setCurrentPage={this.setCurrentPage} 
-            toggleIsFollowed={toggleIsFollowed} />
+            <Users {...this.props}
+                setCurrentPage={this.setCurrentPage}
+                toggleIsFollowed={toggleIsFollowed} />
         )
     }
 }
@@ -35,4 +35,4 @@ let mapStateToProps = (state) => {
         isFollowingProgress: getIsFollowingProgress(state)
     }
 }
-export default compose(connect(mapStateToProps,{ requestUsers, toggleIsFetching, toggleIsFollowed, follow, unfollow }))(UsersAPIContainer);
+export default compose(connect(mapStateToProps, { requestUsers, toggleIsFetching, toggleIsFollowed, follow, unfollow }))(UsersAPIContainer);

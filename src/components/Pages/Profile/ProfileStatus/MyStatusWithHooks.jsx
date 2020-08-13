@@ -3,7 +3,7 @@ import styles from './MyStatus.module.sass';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const ProfileStatusWithHooks = ({ status, updateStatus }) => {
+const ProfileStatusWithHooks = ({ status, updateStatus, isOwner }) => {
   let [editMode, setEditMode] = useState(false);
   let [localStatus, setLocalStatus] = useState(status);
   useEffect(() => {
@@ -11,7 +11,9 @@ const ProfileStatusWithHooks = ({ status, updateStatus }) => {
   }, [status]);
 
   const activeEditMode = () => {
-    setEditMode(true);
+      if(isOwner) {
+        setEditMode(true);
+      }
   }
   const deactivateEditMode = () => {
     setEditMode(false);
@@ -22,7 +24,7 @@ const ProfileStatusWithHooks = ({ status, updateStatus }) => {
   }
   return (
     <>
-      {editMode ?
+      {!editMode ?
         <div>
           <div onClick={activeEditMode} className={styles.status__text} ><span>Status:</span> {status || "________"}</div>
         </div> :
