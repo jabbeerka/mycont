@@ -18,7 +18,7 @@ const User = ({ user, isFollowingProgress, follow, unfollow }) => {
                             unfollow(user.id)
                         }
                         }
-                        className={styles.follow_btn}>Unfollow</button>
+                        className={styles.follow_btn_un}>Unfollow</button>
                     : <button disabled={isFollowingProgress.some(id => id === user.id)}
                         onClick={() => {
                             follow(user.id)

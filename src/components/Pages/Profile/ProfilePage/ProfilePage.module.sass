@@ -19,16 +19,17 @@
             z-index: -1
         &_change + label
             position: absolute
-            top: 10px
+            padding: 5px
+            top: 0
             left: 35px
             background-color: #04d4fb
             font-size: 12px
             color: white
-            border: 0.1px white solid
+            border: 0.1px gray solid
             border-radius: 5px
         &_change:focus + label,
         &_change + label:hover
-            background-color: gold
+            background-color: #024064
             cursor: pointer
         &_wrap
             position: relative
@@ -105,6 +106,10 @@
         border: none
         border-radius: 10px
         color: #fff
+        cursor: pointer
+        &:focus,
+        &:hover
+            box-shadow: 0 5px 3px rgba(0,0,0,0.5); /* Тень */
     &__error
         color: red
         display: block

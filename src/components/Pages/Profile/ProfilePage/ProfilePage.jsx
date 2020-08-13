@@ -26,7 +26,7 @@ const ProfilePage = ({ profile, status, updateStatus, isOwner, setPhoto, savePro
       <div className={styles.prof__avatar_wrap} >
         <img src={profile.photos.large || avatar} alt="avatar" className={styles.prof__avatar} />
         <input type="file" onChange={onPhothoChanged} className={styles.prof__avatar_change} name="file" id="file" />
-        {(isOwner) ? <label htmlFor="file">edit photo</label> : ""}
+        {(isOwner) ? <label htmlFor="file">Set photo</label> : ""}
       </div>
       <div className={styles.prof__info}>
         <ProfileStatus status={status} updateStatus={updateStatus} isOwner={isOwner}/>

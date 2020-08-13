@@ -1,16 +1,25 @@
 .status
     &__text
+        width: 220px
         font-size: 18px
         color: #04D4FB
         border: 1px solid gray
-        padding: 5px
+        padding: 10px
         border-block-start-color: gold
         border-block-end-color: #04D4FB
         border-top-left-radius: 15px
         border-bottom-right-radius: 15px
+        cursor: pointer
+        &:focus,
+        &:hover
+            box-shadow: 0 5px 3px rgba(0,0,0,0.5); /* Тень */
+        
         span
             color: gray
             font-style: italic
+            text-align: center
+        text
+            text-align: center
     &__inputArea
         width: 220px
         height: 22px
