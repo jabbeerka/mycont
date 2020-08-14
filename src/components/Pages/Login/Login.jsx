@@ -17,7 +17,7 @@ const LoginForm = ({handleSubmit, error, captchaUrl}) => {
                 <div className={styles.form__input_checkbox}>
                     {fieldCreator(null, null, "rememberMe", Input, null, "checkbox")}<span>Remember me</span>
                 </div>
-                {captchaUrl && <img src={captchaUrl} alt="captcha"/> }
+                {captchaUrl && <img src={captchaUrl} className={styles.form__captcha} alt="captcha"/> }
                 {captchaUrl && fieldCreator(styles.form__input, "write symbols", "captcha", Input, [required]) }
                 {error && <div className={styles.form__error} >{error}</div>}
                 <button className={styles.form__button}>Sign in</button>

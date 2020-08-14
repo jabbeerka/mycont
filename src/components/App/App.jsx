@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import styles from './App.module.scss';
 import Navigator from '../Nav';
-import { HashRouter, Route } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import Header from '../Header/';
 import { initialized } from '../../Redux/app-reducer';
 import { connect } from 'react-redux';
@@ -25,21 +25,24 @@ class App extends React.Component {
       return <Preloader />
     }
     return (
-      <HashRouter>
+      <BrowserRouter>
         <Suspense fallback={<Preloader />}>
           <div className={styles.body}>
               <Header />
               <Navigator />
-              <Route path="/profile/:userId?" render={() => <Profile />} />
-              <Route path="/dialogs" render={() => <Dialogs />} />
-              <Route path="/news" render={() => <News />} />
-              <Route path="/musics" render={() => <Musics />} />
-              <Route path="/settings" render={() => <Settings />} />
-              <Route path="/users" render={() => <Users />} />
-              <Route path="/login" render={() => <Login />} />
+              <Switch>
+                <Route path="/profile/:userId?" render={() => <Profile />} />
+                <Route path="/dialogs" render={() => <Dialogs />} />
+                <Route path="/news" render={() => <News />} />
+                <Route path="/musics" render={() => <Musics />} />
+                <Route path="/settings" render={() => <Settings />} />
+                <Route path="/users" render={() => <Users />} />
+                <Route path="/login" render={() => <Login />} />
+                <Redirect from="/" to="/profile" />
+              </Switch>
           </div>
         </Suspense>
-      </HashRouter>
+      </BrowserRouter>
 
     )
   }
@@ -53,11 +56,11 @@ const AppContainer = connect(mapStateToProps, { initialized })(App);
 
 const MyContentAPP = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store} >
         <AppContainer />
       </Provider>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 export default MyContentAPP;
